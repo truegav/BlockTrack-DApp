@@ -17,7 +17,45 @@ function getInjectedProvider() {
 }
 
 // Translate cryptic wallet/RPC errors into actionable messages.
+function revertHint(reason) {
+  const HINTS = [
+    [/tracking id exists/i, 'That tracking ID is already registered. Search it in the Track tab or use a new ID.'],
+    [/not authorized/i, 'This wallet is not authorized. Admin: add it as a logistics user first (Admin tab).'],
+    [/parcel not found/i, 'No parcel with that ID. Create it in the Admin tab first.'],
+    [/already delivered|already cancelled/i, 'Parcel is in a final state and cannot be updated further.'],
+    [/same status/i, 'Parcel is already in that status — pick a different one.'],
+    [/invalid status/i, 'That status transition is not allowed.'],
+  ];
+  for (const [re, hint] of HINTS) {
+    if (re.test(reason)) return `${reason} — ${hint}`;
+  }
+  return reason;
+}
+
+// MetaMask wraps contract reverts as "Internal JSON-RPC error" with the real
+// reason nested several levels deep. Dig it out.
+function revertReason(e) {
+  const candidates = [
+    e?.data?.message,
+    e?.error?.message,
+    e?.error?.data?.message,
+    e?.info?.error?.message,
+    e?.info?.error?.data?.message,
+    e?.reason,
+    e?.message,
+  ];
+  for (const c of candidates) {
+    if (typeof c === 'string') {
+      const m = c.match(/execution reverted(?::\s*([^,}"]+))?/i);
+      if (m) return (m[1] || '').trim() || 'transaction reverted by contract';
+    }
+  }
+  return null;
+}
+
 function friendlyError(e) {
+  const rr = revertReason(e);
+  if (rr) return { rejected: false, text: 'Contract rejected it: ' + revertHint(rr) };
   const m = e?.info?.error?.message || e?.reason || e?.message || String(e);
   if (e?.code === 4001 || e?.code === 'ACTION_REJECTED' || /user rejected/i.test(m)) {
     return { rejected: true, text: m };
@@ -135,9 +173,9 @@ export default function App() {
       }
       await connect(); // refresh account + chain id after switch
     } catch (e) {
-      const m = e?.message || String(e);
-      if (e?.code === 4001 || /rejected/i.test(m)) setMsg('Network switch rejected in MetaMask.');
-      else setMsg('Network switch failed: ' + m);
+      const f = friendlyError(e);
+      if (f.rejected) setMsg('Network switch rejected in MetaMask.');
+      else setMsg('Network switch failed: ' + f.text);
     }
   }
 
