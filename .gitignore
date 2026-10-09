@@ -1,0 +1,7 @@
+out/
+broadcast/
+cache/
+lib/
+.env
+frontend/node_modules/
+frontend/dist/
