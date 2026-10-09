@@ -1,5 +1,7 @@
 # BlockTrack — Minimal PoC (Foundry, local only)
 
+Live repo: https://github.com/truegav/BlockTrack-DApp
+
 Admin creates parcels, logistics updates status on-chain, anyone reads history.
 Built with Foundry (`forge`/`cast`/`anvil`). No Hardhat, no npm at root, no Sepolia.
 
