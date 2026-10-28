@@ -34,6 +34,9 @@ This is a working privacy-focused prototype, not a production logistics platform
 - [Foundry](https://book.getfoundry.sh/) (`forge`, `anvil`, `cast`)
 - Chrome or Chromium, only for `npm run test:e2e` and `npm run screens`
 
+> Fresh clone? The Foundry libraries (`forge-std`, OpenZeppelin) are git submodules:
+> `git clone --recursive <repo>` or `git submodule update --init --recursive`.
+
 ### Run it
 
 ```bash

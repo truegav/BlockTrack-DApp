@@ -4,7 +4,6 @@ import { useQueryClient } from '@tanstack/react-query';
 import { isAddress } from 'ethers';
 import {
   KeyRound,
-  Search,
   ShieldCheck,
   UserPlus,
   Users,
@@ -13,10 +12,10 @@ import { PageHeader } from '../components/ui/PageHeader.jsx';
 import { Button } from '../components/ui/Button.jsx';
 import { Callout } from '../components/ui/Callout.jsx';
 import { EmptyState } from '../components/ui/EmptyState.jsx';
-import { Field, TextField } from '../components/ui/Form.jsx';
+import { TextField } from '../components/ui/Form.jsx';
 import { PageSkeleton } from '../components/ui/Skeleton.jsx';
 import { StatCard } from '../components/ui/StatCard.jsx';
-import { Badge, RoleBadge } from '../components/ui/Badges.jsx';
+import { Badge } from '../components/ui/Badges.jsx';
 import { Avatar } from '../components/ui/Avatar.jsx';
 import { Entity } from '../components/ui/Identity.jsx';
 import { Modal } from '../components/ui/Modal.jsx';

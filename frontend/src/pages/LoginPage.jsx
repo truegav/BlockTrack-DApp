@@ -9,7 +9,6 @@ import {
 } from 'lucide-react';
 import { useWallet } from '../context/WalletContext.jsx';
 import { usePageTitle } from '../hooks/usePageTitle.js';
-import { roleLabel } from '../shared/personas.js';
 import { Avatar } from '../components/ui/Avatar.jsx';
 import { Button } from '../components/ui/Button.jsx';
 import { Callout } from '../components/ui/Callout.jsx';

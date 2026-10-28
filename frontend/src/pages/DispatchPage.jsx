@@ -23,7 +23,7 @@ import { formatRelative, shortAddress } from '../lib/format.js';
 const ZERO = '0x0000000000000000000000000000000000000000';
 
 export function DispatchPage() {
-  const { session, ordersState } = useOutletContext();
+  const { ordersState } = useOutletContext();
   const { orders, isLoading, error, refetch, isFetching } = ordersState;
   const { couriers } = useCouriers();
   const [selectedOrder, setSelectedOrder] = useState(null);

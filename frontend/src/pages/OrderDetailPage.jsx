@@ -4,7 +4,6 @@ import { useQueryClient } from '@tanstack/react-query';
 import {
   AlertTriangle,
   ArrowLeft,
-  Check,
   KeyRound,
   Lock,
   MapPin,
@@ -12,7 +11,6 @@ import {
   Phone,
   ShieldCheck,
   Truck,
-  UserRound,
   X,
 } from 'lucide-react';
 import { useCouriers, useProfiles } from '../hooks/useProfile.js';
@@ -95,20 +93,6 @@ function DetailSkeleton() {
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-function InfoRow({ icon: Icon, label, children }) {
-  return (
-    <div className="info-row">
-      {Icon ? (
-        <span className="info-row__icon">
-          <Icon size={13} aria-hidden="true" />
-        </span>
-      ) : null}
-      <span className="info-row__label">{label}</span>
-      <span className="info-row__value">{children}</span>
     </div>
   );
 }

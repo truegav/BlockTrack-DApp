@@ -32,7 +32,7 @@ import {
   shortAddress,
   timeOfDayGreeting,
 } from '../lib/format.js';
-import { isFinalStatus, statusMeta } from '../lib/status.js';
+import { isFinalStatus } from '../lib/status.js';
 
 const ZERO = '0x0000000000000000000000000000000000000000';
 const PRIORITY = {
