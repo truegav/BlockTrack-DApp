@@ -105,6 +105,24 @@ npm test
 Expected: 34 Foundry tests and 7 crypto tests pass. If there is time, show the status
 machine/role tests in `test/BlockTrack.t.sol`.
 
+### 9. Caliper benchmark (optional, ~40 s)
+
+```bash
+npm run bench:install   # once, if not already installed
+npm run bench           # Anvil must already be running
+```
+
+Show the two-round table in `benchmarks/caliper/results/summary.md` or the native
+report. The run deploys a scratch contract and executes 50 `createOrder` writes at
+5 TPS and 100 `publicStatus` reads at 20 TPS.
+
+**Talking point:** Caliper measures the chain/RPC path. It deliberately does not
+measure the browser AES-GCM/ECIES work; that is covered by the crypto tests. The
+Ethereum Caliper adapter is deprecated and uses web3 1.2, which is fine for this
+local demonstration but not a production benchmark. The harness uses a small
+runner because the Caliper 0.6 CLI's yargs loader does not register commands on
+Node 26.
+
 ## Architecture in one breath
 
 > A static React app reads and writes directly to the contract. Each order has a random
@@ -132,6 +150,9 @@ machine/role tests in `test/BlockTrack.t.sol`.
 | How do you scale the order list? | At 10 orders the browser scans events. Production needs an indexer that reads only public fields; decryption still happens client-side. |
 | What is the biggest risk? | The admin trust boundary and browser compromise, plus metadata leakage. The contract is unaudited and the crypto is application-level. |
 | Why Anvil keys? | Convenience for the demo. They are publicly known, have no value and must never be used on a real network. |
+| Why Caliper? | It is the standard Hyperledger benchmarking harness and gives a reproducible report for the contract path. It is a separate, optional harness, not part of the app runtime. |
+| Why don't the Caliper numbers include encryption? | Caliper is chain-level. The browser crypto and UI are measured by the crypto tests and E2E; mixing them into Caliper would measure the wrong system. |
+| Are the Caliper numbers production numbers? | No. They are single-worker local Anvil microbenchmarks, useful for showing the integration and relative write/read cost. |
 
 ## What not to claim
 

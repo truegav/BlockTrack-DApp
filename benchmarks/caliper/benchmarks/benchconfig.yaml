@@ -1,0 +1,28 @@
+test:
+  name: BlockTrack contract microbenchmarks
+  description: >
+    Caliper benchmarks for the BlockTrack Solidity contract on Anvil. The write
+    round measures order creation with dummy encrypted payloads; the read round
+    measures the public status getter. These are contract/RPC microbenchmarks,
+    not browser encryption timings.
+  workers:
+    number: 1
+  rounds:
+    - label: create-order
+      description: Create an order with a 200-byte ciphertext and two 129-byte wrapped keys.
+      txNumber: 50
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 5
+      workload:
+        module: workloads/createOrder.js
+    - label: public-status-read
+      description: Read the public status of one existing order.
+      txNumber: 100
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 20
+      workload:
+        module: workloads/readOrder.js

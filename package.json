@@ -16,7 +16,10 @@
     "deploy": "node scripts/deploy.mjs",
     "seed": "node scripts/seed.mjs",
     "demo:reset": "node scripts/reset.mjs",
-    "postinstall": "npm --prefix frontend install"
+    "postinstall": "npm --prefix frontend install",
+    "bench:install": "npm --prefix benchmarks/caliper install",
+    "bench:prepare": "node scripts/caliper-contract.mjs",
+    "bench": "node scripts/caliper-contract.mjs && npm --prefix benchmarks/caliper run bench"
   },
   "devDependencies": {
     "eciesjs": "^0.5.0",

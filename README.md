@@ -243,6 +243,7 @@ frontend/src/
   shared/                     Crypto, ABI, personas, pure crypto tests
   styles/                     Cold Precision token system + CSS
 scripts/                      One-command dev stack, deploy, seed, E2E, screenshots
+benchmarks/caliper/           Optional Hyperledger Caliper benchmark harness
 docs/                         Privacy model, viva demo, screenshots
 ```
 
@@ -312,6 +313,65 @@ the throwaway Anvil demo. `npm run screens` is read-only and expects a freshly s
 
 ---
 
+## Benchmarks (Hyperledger Caliper)
+
+Caliper is wired in as an **optional contract microbenchmark harness**. It is not
+part of the app runtime and does not run in `npm test`; it is here so the project
+can show a standard blockchain benchmarking tool and a repeatable report.
+
+The harness deploys a scratch `BlockTrack` contract to Anvil and runs two rounds:
+
+| Round | Transactions | Success | Send rate | Avg latency | Throughput |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `create-order` | 50 | 50 | 5.1 TPS | 0.04 s | 5.1 TPS |
+| `public-status-read` | 100 | 100 | 20.2 TPS | 0.00 s | 20.2 TPS |
+
+Run on local Anvil on 28 Oct 2026. Full output: [summary](benchmarks/caliper/results/summary.md)
+· [native Caliper report](benchmarks/caliper/results/report.html)
+· [console log](benchmarks/caliper/results/caliper.log).
+
+![Caliper report](docs/screens/caliper-report.png)
+
+### Run it
+
+```bash
+npm run bench:install   # once; installs the Caliper CLI/core packages
+npm run dev             # Anvil must be running on ws://127.0.0.1:8545
+npm run bench           # deploy a scratch contract and run both rounds
+```
+
+`npm run bench` regenerates `benchmarks/caliper/contracts/BlockTrack.json` from
+the Foundry artifact, then runs the Caliper engine. The report is written to
+`benchmarks/caliper/results/report.html`.
+
+See [`benchmarks/caliper/README.md`](benchmarks/caliper/README.md) for the config,
+workloads, adapter caveats and how to add rounds.
+
+### What this does and does not measure
+
+- **Does:** ABI encoding, transaction signing/relay, EVM execution, gas,
+  receipt confirmation and the public read path through Anvil.
+- **Does not:** Browser-side AES-GCM/ECIES, wallet signatures, UI rendering,
+  event indexing or decryption of the order list. Those are covered by the
+  crypto tests and the browser E2E; Caliper is a chain-level tool.
+- The write round uses dummy ciphertext and dummy 129-byte wrapped-key envelopes.
+  The contract validates lengths, holder membership and the admin key, but does
+  not decrypt in this benchmark. This keeps the harness focused on Caliper and
+  avoids pretending it measures client crypto.
+
+### Caliper caveats
+
+- Caliper 0.6.0 and `@hyperledger/caliper-ethereum` 0.6.0 are the latest published
+  versions, but the Ethereum adapter is **deprecated** and uses web3.js 1.2.x.
+  It is suitable for a local Anvil demonstration, not a production benchmark.
+- The adapter only accepts **WebSocket** RPC; the config uses
+  `ws://127.0.0.1:8545`. HTTP RPC is rejected by design.
+- The Caliper 0.6 CLI's `yargs@15` command loader does not register commands on
+  Node 26, so `benchmarks/caliper/run.cjs` invokes the same `CaliperEngine` the
+  CLI's `launch manager` uses. `bench:cli` remains available for Node 20.
+- The config uses Anvil's publicly known development keys. Never run it against
+  a real network.
+
 ## Production notes
 
 This prototype makes deliberate trade-offs that a real deployment must revisit:
@@ -340,9 +400,10 @@ This prototype makes deliberate trade-offs that a real deployment must revisit:
 
 - [Privacy model](docs/PRIVACY.md) — threat model, key derivation, revocation, limits.
 - [Viva demo](docs/VIVA.md) — a 5-minute walkthrough and likely questions.
+- [Caliper benchmarks](benchmarks/caliper/README.md) — harness, configs, caveats and results.
 - [Screens](docs/screens) — desktop, dark and mobile captures.
 
 ## Stack
 
 Foundry · Solidity 0.8.24 · OpenZeppelin 5 · React 18 · Vite 5 · React Router 7 ·
-TanStack Query 5 · ethers 6 · eciesjs · IBM Plex · Lucide.
+TanStack Query 5 · ethers 6 · eciesjs · IBM Plex · Lucide. Benchmarks: Hyperledger Caliper 0.6.
