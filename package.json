@@ -1,0 +1,26 @@
+{
+  "name": "blocktrack",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "BlockTrack — privacy-preserving parcel tracking on-chain",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "npm --prefix frontend run preview",
+    "test": "npm run test:contracts && npm run test:crypto",
+    "test:contracts": "forge test",
+    "test:crypto": "node --test frontend/src/shared/crypto.test.js",
+    "test:e2e": "node scripts/e2e.mjs",
+    "screens": "node scripts/screens.mjs",
+    "deploy": "node scripts/deploy.mjs",
+    "seed": "node scripts/seed.mjs",
+    "demo:reset": "node scripts/reset.mjs",
+    "postinstall": "npm --prefix frontend install"
+  },
+  "devDependencies": {
+    "eciesjs": "^0.5.0",
+    "ethers": "^6.13.2",
+    "playwright-core": "^1.64.1"
+  }
+}

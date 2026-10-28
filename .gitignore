@@ -1,8 +1,25 @@
 out/
 broadcast/
 cache/
-lib/
+/lib/
 .env
+.env.local
+
+node_modules/
 frontend/node_modules/
 frontend/dist/
-.playwright-mcp/
+frontend/public/deployment.json
+
+# local tooling / generated state
+.home/
+.svm/
+.npm-cache/
+.tmp/
+.qa/
+playwright-report/
+test-results/
+
+# editor
+.DS_Store
+.vscode/
+.idea/
