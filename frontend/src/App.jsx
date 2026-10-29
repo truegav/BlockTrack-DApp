@@ -8,6 +8,7 @@ import {
 import { useEffect } from 'react';
 import { useWallet } from './context/WalletContext.jsx';
 import { AppShell } from './components/layout/AppShell.jsx';
+import { BenchmarksPage } from './pages/BenchmarksPage.jsx';
 import {
   RequireProfile,
   RequireRole,
@@ -61,6 +62,7 @@ export function App() {
           <Route path="/track" element={<PublicTrackPage />} />
           <Route path="/track/:id" element={<PublicTrackPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/benchmarks" element={<BenchmarksPage />} />
         </Route>
 
         <Route element={<RequireWallet />}>

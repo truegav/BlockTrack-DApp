@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 import {
   AlertTriangle,
   Check,
+  Gauge,
   Package,
   RefreshCw,
   Truck,
@@ -79,14 +80,20 @@ export function ReportsPage() {
         title="Reports"
         subtitle="Operational aggregates computed in this browser from decrypted chain events. Nothing is sent to a server."
         actions={
-          <Button
-            variant="secondary"
-            icon={RefreshCw}
-            onClick={() => refetch()}
-            loading={isFetching}
-          >
-            Refresh
-          </Button>
+          <>
+            <Link to="/benchmarks" className="btn btn--secondary">
+              <Gauge size={15} aria-hidden="true" />
+              Benchmarks
+            </Link>
+            <Button
+              variant="secondary"
+              icon={RefreshCw}
+              onClick={() => refetch()}
+              loading={isFetching}
+            >
+              Refresh
+            </Button>
+          </>
         }
       />
 

@@ -23,6 +23,14 @@ export function PublicLayout() {
               Track
             </NavLink>
             <NavLink
+              to="/benchmarks"
+              className={({ isActive }) =>
+                `public-nav__link${isActive ? ' public-nav__link--active' : ''}`
+              }
+            >
+              Benchmarks
+            </NavLink>
+            <NavLink
               to="/privacy"
               className={({ isActive }) =>
                 `public-nav__link${isActive ? ' public-nav__link--active' : ''}`
@@ -51,6 +59,8 @@ export function PublicLayout() {
           </span>
           <span>
             <Link to="/privacy">Privacy model</Link>
+            <span aria-hidden="true"> · </span>
+            <Link to="/benchmarks">Benchmarks</Link>
             <span aria-hidden="true"> · </span>
             <Link to="/track">Track a shipment</Link>
           </span>

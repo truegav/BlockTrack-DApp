@@ -112,9 +112,11 @@ npm run bench:install   # once, if not already installed
 npm run bench           # Anvil must already be running
 ```
 
-Show the two-round table in `benchmarks/caliper/results/summary.md` or the native
-report. The run deploys a scratch contract and executes 50 `createOrder` writes at
-5 TPS and 100 `publicStatus` reads at 20 TPS.
+Open **http://127.0.0.1:5173/benchmarks** first — it presents the two-round
+Caliper snapshot without a login. The underlying run deploys a scratch contract
+and executes 50 `createOrder` writes at 5 TPS and 100 `publicStatus` reads at
+20 TPS. The native report is linked from that page; the raw files live in
+`benchmarks/caliper/results/`.
 
 **Talking point:** Caliper measures the chain/RPC path. It deliberately does not
 measure the browser AES-GCM/ECIES work; that is covered by the crypto tests. The

@@ -22,6 +22,12 @@ Anvil on `ws://127.0.0.1:8545`. One worker, fixed-rate workload.
 These are local microbenchmark numbers, not production throughput claims. They
 show the Caliper integration and the relative cost of the write and read paths.
 
+The demo site renders the same snapshot at **`/benchmarks`** (no login), with a
+short methodology and a link to a served copy of the native report. The page is
+static: after rerunning the harness, update `frontend/src/shared/benchmarks.js`
+and copy `results/report.html` to
+`frontend/public/benchmarks/caliper-report.html`.
+
 ## Quick start
 
 From the repository root:

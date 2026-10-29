@@ -2,6 +2,7 @@ import { Link, Navigate, useLocation } from 'react-router-dom';
 import {
   ArrowRight,
   Check,
+  Gauge,
   KeyRound,
   Lock,
   ShieldCheck,
@@ -218,9 +219,15 @@ export function LoginPage() {
               <span className="dot" aria-hidden="true" />
               {wallet.chainError ? 'Chain unreachable' : `Anvil · chain ${wallet.deployment.chainId}`}
             </span>
-            <Link className="btn btn--link" to="/track">
-              Track a shipment <ArrowRight size={13} aria-hidden="true" />
-            </Link>
+            <span className="row" style={{ gap: 12 }}>
+              <Link className="btn btn--link" to="/benchmarks">
+                <Gauge size={13} aria-hidden="true" />
+                Benchmarks
+              </Link>
+              <Link className="btn btn--link" to="/track">
+                Track a shipment <ArrowRight size={13} aria-hidden="true" />
+              </Link>
+            </span>
           </div>
 
           <div className="auth-footnote">

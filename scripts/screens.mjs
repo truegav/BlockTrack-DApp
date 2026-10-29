@@ -122,6 +122,8 @@ try {
     await shot(page, 'public-track');
     await go(page, '/privacy');
     await shot(page, 'public-privacy');
+    await go(page, '/benchmarks');
+    await shot(page, 'public-benchmarks');
     await go(page, '/does-not-exist');
     await shot(page, 'not-found');
     await context.close();

@@ -330,6 +330,13 @@ Run on local Anvil on 28 Oct 2026. Full output: [summary](benchmarks/caliper/res
 · [native Caliper report](benchmarks/caliper/results/report.html)
 · [console log](benchmarks/caliper/results/caliper.log).
 
+The same results are presented in the demo at **`/benchmarks`** — no login
+required. The page is a static snapshot; refresh it with
+`npm run bench` and update `frontend/src/shared/benchmarks.js` plus the served
+report copy.
+
+![Caliper benchmark page](docs/screens/public-benchmarks.png)
+
 ![Caliper report](docs/screens/caliper-report.png)
 
 ### Run it
