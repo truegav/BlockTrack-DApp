@@ -12,6 +12,16 @@ There is no API, no database, no account server, and no plaintext ever leaves th
 
 ![Customer dashboard](docs/screens/customer-dashboard.png)
 
+## Project report
+
+The final implementation report covers the delivered system, the scope changes from the
+original synopsis, the privacy design, the key trade-offs, the test and benchmark
+evidence, and the updated team ownership.
+
+- [BlockTrack — Final Implementation Report (PDF)](docs/report/BlockTrack-Final-Report.pdf)
+- [Readable HTML version](docs/report/BlockTrack-Final-Report.html)
+- [Report source and build instructions](docs/report/README.md)
+
 ---
 
 ## What this is (and is not)

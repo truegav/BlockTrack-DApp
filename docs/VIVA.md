@@ -3,6 +3,8 @@
 A 5–7 minute walkthrough of the privacy properties and the full user flow. It assumes
 `npm run dev` is running at <http://127.0.0.1:5173> with a fresh seed.
 
+Full written report: [docs/report/BlockTrack-Final-Report.pdf](report/BlockTrack-Final-Report.pdf).
+
 ## Before you start
 
 ```bash

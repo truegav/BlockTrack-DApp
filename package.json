@@ -19,7 +19,8 @@
     "postinstall": "npm --prefix frontend install",
     "bench:install": "npm --prefix benchmarks/caliper install",
     "bench:prepare": "node scripts/caliper-contract.mjs",
-    "bench": "node scripts/caliper-contract.mjs && npm --prefix benchmarks/caliper run bench"
+    "bench": "node scripts/caliper-contract.mjs && npm --prefix benchmarks/caliper run bench",
+    "report": "node scripts/build-report.mjs"
   },
   "devDependencies": {
     "eciesjs": "^0.5.0",
