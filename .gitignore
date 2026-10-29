@@ -18,7 +18,6 @@ frontend/public/deployment.json
 .qa/
 playwright-report/
 test-results/
-docs/report/.build/
 
 # editor
 .DS_Store
